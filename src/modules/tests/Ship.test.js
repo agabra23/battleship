@@ -1,15 +1,35 @@
-import Ship from "../Ship";
+import { experiments } from "webpack";
+import Ship from "../Ship.js";
 
-test("Hit Method", () => {
-  const ship = new Ship(3);
-  ship.hit();
-  expect(ship.hits).toBe(1);
+// Get Length
+test("getLength", () => {
+  const ship1 = new Ship([4, 4], [1, 4]);
+  expect(ship1.getLength()).toBe(3);
 });
 
-test("isSunk Method", () => {
-  const ship = new Ship(3);
-  ship.hit();
-  ship.hit();
-  ship.hit();
-  expect(ship.isSunk()).toBe(true);
+// isSunk False
+test("isSunk False", () => {
+  const ship1 = new Ship([4, 4], [1, 4]);
+  expect(ship1.isSunk()).toBe(false);
+});
+
+// isSunk True
+test("isSunk True", () => {
+  const ship1 = new Ship([4, 4], [1, 4]);
+  ship1.hit();
+  ship1.hit();
+  ship1.hit();
+  expect(ship1.isSunk()).toBe(true);
+});
+
+test("Hit Count 0", () => {
+  const ship1 = new Ship([4, 4], [1, 4]);
+  expect(ship1.getHits()).toEqual(0);
+});
+
+test("Hit Count 2", () => {
+  const ship1 = new Ship([4, 4], [1, 4]);
+  ship1.hit();
+  ship1.hit();
+  expect(ship1.getHits()).toEqual(2);
 });

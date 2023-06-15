@@ -1,17 +1,28 @@
-const Ship = function (length) {
-  this.length = length;
+const Ship = function (start, end) {
+  this.start = start;
+  this.end = end;
   this.hits = 0;
 
-  this.hit = () => {
+  getHits = () => {
+    return this.hits;
+  };
+
+  hit = () => {
     this.hits++;
   };
 
-  this.isSunk = () => {
-    if (this.hits === this.length) return true;
-    return false;
+  getLength = () => {
+    const xLength = Math.abs(start[0] - end[0]);
+    const yLength = Math.abs(start[1] - end[1]);
+
+    if (xLength > 0) return xLength;
+    return yLength;
   };
 
-  //   return { isSunk, hit };
-};
+  isSunk = () => {
+    return this.hits === getLength();
+  };
 
+  return { getLength, isSunk, hit, getHits };
+};
 export default Ship;
