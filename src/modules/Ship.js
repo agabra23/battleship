@@ -3,15 +3,15 @@ const Ship = function (start, end) {
   this.end = end;
   this.hits = 0;
 
-  getHits = () => {
+  const getHits = () => {
     return this.hits;
   };
 
-  hit = () => {
+  const hit = () => {
     this.hits++;
   };
 
-  getLength = () => {
+  const getLength = () => {
     const xLength = Math.abs(start[0] - end[0]);
     const yLength = Math.abs(start[1] - end[1]);
 
@@ -19,7 +19,7 @@ const Ship = function (start, end) {
     return yLength;
   };
 
-  isSunk = () => {
+  const isSunk = () => {
     return this.hits === getLength();
   };
 
