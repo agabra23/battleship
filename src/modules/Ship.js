@@ -1,6 +1,5 @@
-const Ship = function (start, end) {
-  this.start = start;
-  this.end = end;
+const Ship = function (path) {
+  this.path = path;
   this.hits = 0;
 
   const getHits = () => {
@@ -12,17 +11,21 @@ const Ship = function (start, end) {
   };
 
   const getLength = () => {
-    const xLength = Math.abs(start[0] - end[0]);
-    const yLength = Math.abs(start[1] - end[1]);
-
-    if (xLength > 0) return xLength;
-    return yLength;
+    let count = 0;
+    this.path.forEach((element) => {
+      count++;
+    });
+    return count;
   };
 
   const isSunk = () => {
-    return this.hits === getLength();
+    return this.hits >= getLength();
   };
 
-  return { getLength, isSunk, hit, getHits };
+  const getPath = () => {
+    return this.path;
+  };
+
+  return { getLength, isSunk, hit, getHits, getPath };
 };
 export default Ship;
