@@ -6,6 +6,8 @@ const Gameboard = function () {
   const misses = [];
   let ships = [];
 
+  
+
   const placeShip = (ship) => {
     const path = ship.getPath();
     path.forEach((coordinates) => {
