@@ -29,5 +29,5 @@ const Player = (type) => {
     return move;
   };
 
-  return { attempt };
+  return { attempt, generateMove };
 };
