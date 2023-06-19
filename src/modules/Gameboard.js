@@ -4,6 +4,7 @@ const Gameboard = function () {
   const boardArray = [...Array(10)].map((e) => Array(10));
   const hits = [];
   const misses = [];
+  let ships = [];
 
   const placeShip = (ship) => {
     const path = ship.getPath();
@@ -36,7 +37,11 @@ const Gameboard = function () {
     }
   };
 
-  return { placeShip, boardArray, receiveAttack, hits, misses };
+  const addShip = (ship) => {
+    ships.push(ship);
+  };
+
+  return { placeShip, boardArray, receiveAttack, hits, misses, addShip };
 };
 
 export default Gameboard;
