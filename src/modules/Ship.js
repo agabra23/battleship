@@ -1,29 +1,28 @@
 const Ship = function (path) {
-  this.path = path;
-  this.hits = 0;
+  let hits = 0;
 
   const getHits = () => {
-    return this.hits;
+    return hits;
   };
 
   const hit = () => {
-    this.hits++;
+    hits++;
   };
 
   const getLength = () => {
     let count = 0;
-    this.path.forEach((element) => {
+    path.forEach((element) => {
       count++;
     });
     return count;
   };
 
   const isSunk = () => {
-    return this.hits >= getLength();
+    return hits >= getLength();
   };
 
   const getPath = () => {
-    return this.path;
+    return path;
   };
 
   return { getLength, isSunk, hit, getHits, getPath };
