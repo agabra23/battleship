@@ -31,3 +31,5 @@ const Player = (type) => {
 
   return { attempt, generateMove };
 };
+
+export default Player;

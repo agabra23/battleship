@@ -6,7 +6,11 @@ const Gameboard = function () {
   const misses = [];
   let ships = [];
 
-  
+  const resetGameboard = () => {
+    hits = [];
+    misses = [];
+    ships = [];
+  };
 
   const placeShip = (ship) => {
     const path = ship.getPath();
