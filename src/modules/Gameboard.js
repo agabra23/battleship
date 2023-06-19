@@ -16,7 +16,24 @@ const Gameboard = function () {
   const receiveAttack = (coordinates) => {
     const [x, y] = coordinates;
 
-    boardArray[x][y].hit();
+    let alreadyHit,
+      alreadyMiss = false;
+
+    alreadyHit = hits.some((item) => {
+      const [xItem, yItem] = item;
+      return xItem === coordinates[0] && yItem === coordinates[1];
+    });
+    alreadyMiss = misses.some((item) => {
+      const [xItem, yItem] = item;
+      return xItem === coordinates[0] && yItem === coordinates[1];
+    });
+
+    if (boardArray[x][y].type === "ship" && alreadyHit === false) {
+      boardArray[x][y].hit();
+      hits.push(coordinates);
+    } else if (boardArray.type !== "ship" && alreadyMiss === false) {
+      misses.push(coordinates);
+    }
   };
 
   return { placeShip, boardArray, receiveAttack, hits, misses };
