@@ -47,7 +47,15 @@ const Gameboard = function () {
     ships.push(ship);
   };
 
-  return { placeShip, boardArray, receiveAttack, hits, misses, addShip };
+  return {
+    placeShip,
+    boardArray,
+    receiveAttack,
+    hits,
+    misses,
+    addShip,
+    resetGameboard,
+  };
 };
 
 export default Gameboard;
