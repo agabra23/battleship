@@ -1,6 +1,5 @@
 const Ship = function (path) {
   let hits = 0;
-  const type = "ship";
 
   const getHits = () => {
     return hits;
@@ -30,6 +29,6 @@ const Ship = function (path) {
     hits = 0;
   };
 
-  return { getLength, isSunk, hit, getHits, getPath, resetHits, type };
+  return { getLength, isSunk, hit, getHits, getPath, resetHits };
 };
 export default Ship;

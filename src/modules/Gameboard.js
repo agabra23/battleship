@@ -1,10 +1,48 @@
 import Ship from "./Ship.js";
 
 const Gameboard = function () {
-  const boardArray = [...Array(10)].map((e) => Array(10));
+  const boardArray = [...Array(10)].map((e) => Array(10).fill("none"));
   const hits = [];
   const misses = [];
   let ships = [];
+
+  const initBoard = () => {
+    placeShip([
+      [1, 4],
+      [1, 5],
+    ]);
+    placeShip([
+      [6, 4],
+      [6, 5],
+      [6, 6],
+    ]);
+    placeShip([
+      [4, 2],
+      [5, 2],
+      [6, 2],
+      [7, 2],
+    ]);
+    placeShip([
+      [4, 2],
+      [5, 2],
+      [6, 2],
+      [7, 2],
+    ]);
+    placeShip([
+      [8, 3],
+      [8, 4],
+      [8, 5],
+      [8, 6],
+      [8, 7],
+    ]);
+    placeShip([
+      [2, 3],
+      [2, 4],
+      [2, 5],
+      [2, 6],
+      [2, 7],
+    ]);
+  };
 
   const resetGameboard = () => {
     hits = [];
@@ -18,6 +56,7 @@ const Gameboard = function () {
       const [x, y] = coordinates;
       boardArray[x][y] = ship;
     });
+    addShip(ship);
   };
 
   const receiveAttack = (coordinates) => {
@@ -35,10 +74,10 @@ const Gameboard = function () {
       return xItem === coordinates[0] && yItem === coordinates[1];
     });
 
-    if (boardArray[x][y].type === "ship" && alreadyHit === false) {
+    if (boardArray[x][y] !== "none" && alreadyHit === false) {
       boardArray[x][y].hit();
       hits.push(coordinates);
-    } else if (boardArray.type !== "ship" && alreadyMiss === false) {
+    } else if (boardArray[x][y] === "none" && alreadyMiss === false) {
       misses.push(coordinates);
     }
   };
@@ -55,6 +94,7 @@ const Gameboard = function () {
     misses,
     addShip,
     resetGameboard,
+    initBoard,
   };
 };
 

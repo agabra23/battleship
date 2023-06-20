@@ -78,3 +78,17 @@ test("Receive Attack - Hits Array", () => {
     [4, 4],
   ]);
 });
+
+test("Receive Attack - Miss", () => {
+  const ship1 = Ship([
+    [4, 4],
+    [3, 4],
+    [2, 4],
+    [1, 4],
+  ]);
+  const board = new Gameboard();
+
+  board.placeShip(ship1);
+  board.receiveAttack([5, 4]);
+  expect(board.misses).toEqual([[5, 4]]);
+});

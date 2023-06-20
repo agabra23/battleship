@@ -1,5 +1,6 @@
 const Player = (type) => {
   const attempts = [];
+  const turn = false;
 
   const attempt = (coordinates) => {
     attempts.push(coordinates);
@@ -29,7 +30,9 @@ const Player = (type) => {
     return move;
   };
 
-  return { attempt, generateMove };
+  if (type === "computer") return { attempt, generateMove };
+
+  return { attempt };
 };
 
 export default Player;
