@@ -7,41 +7,53 @@ const Gameboard = function () {
   let ships = [];
 
   const initBoard = () => {
-    placeShip([
-      [1, 4],
-      [1, 5],
-    ]);
-    placeShip([
-      [6, 4],
-      [6, 5],
-      [6, 6],
-    ]);
-    placeShip([
-      [4, 2],
-      [5, 2],
-      [6, 2],
-      [7, 2],
-    ]);
-    placeShip([
-      [4, 2],
-      [5, 2],
-      [6, 2],
-      [7, 2],
-    ]);
-    placeShip([
-      [8, 3],
-      [8, 4],
-      [8, 5],
-      [8, 6],
-      [8, 7],
-    ]);
-    placeShip([
-      [2, 3],
-      [2, 4],
-      [2, 5],
-      [2, 6],
-      [2, 7],
-    ]);
+    placeShip(
+      Ship([
+        [1, 4],
+        [1, 5],
+      ])
+    );
+    placeShip(
+      Ship([
+        [6, 4],
+        [6, 5],
+        [6, 6],
+      ])
+    );
+    placeShip(
+      Ship([
+        [4, 2],
+        [5, 2],
+        [6, 2],
+        [7, 2],
+      ])
+    );
+    placeShip(
+      Ship([
+        [4, 2],
+        [5, 2],
+        [6, 2],
+        [7, 2],
+      ])
+    );
+    placeShip(
+      Ship([
+        [8, 3],
+        [8, 4],
+        [8, 5],
+        [8, 6],
+        [8, 7],
+      ])
+    );
+    placeShip(
+      Ship([
+        [2, 3],
+        [2, 4],
+        [2, 5],
+        [2, 6],
+        [2, 7],
+      ])
+    );
   };
 
   const resetGameboard = () => {
@@ -50,13 +62,13 @@ const Gameboard = function () {
     ships = [];
   };
 
-  const placeShip = (ship) => {
-    const path = ship.getPath();
+  const placeShip = (shipObject) => {
+    const path = shipObject.getPath();
     path.forEach((coordinates) => {
       const [x, y] = coordinates;
-      boardArray[x][y] = ship;
+      boardArray[x][y] = shipObject;
     });
-    addShip(ship);
+    addShip(shipObject);
   };
 
   const receiveAttack = (coordinates) => {

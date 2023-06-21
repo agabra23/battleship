@@ -8,10 +8,13 @@ const game = (() => {
   const userPlayer = Player("user");
   const userBoard = Gameboard();
 
-  userBoard.initBoard();
-  computerBoard.initBoard();
+  const initGame = () => {
+    console.log("init");
+    userBoard.initBoard();
+    computerBoard.initBoard();
+  };
 
-  return;
+  return { initGame, computerBoard, computerPlayer, userBoard, userPlayer };
 })();
 
 export default game;

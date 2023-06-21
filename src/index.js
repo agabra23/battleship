@@ -1,10 +1,9 @@
 import Gameboard from "./modules/Gameboard.js";
 import Ship from "./modules/Ship.js";
+import game from "./modules/game.js";
+import UI from "./modules/UI.js";
 
-const board = new Gameboard();
-const ship1 = new Ship([
-  [4, 4],
-  [3, 4],
-  [2, 4],
-  [1, 4],
-]);
+game.initGame();
+
+console.log("start");
+UI.renderBoard(game.userBoard);

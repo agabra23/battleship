@@ -1,0 +1,28 @@
+h1 {
+  color: red;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 800px;
+  height: 800px;
+  border: 1px solid black;
+}
+
+.rowDiv {
+  display: flex;
+  flex: 1;
+  border: 1px solid black;
+}
+
+.boardCell {
+  flex: 1;
+  border-right: 1px dotted black;
+}
+
+.boardCell.shipCell {
+  background-color: red;
+}
