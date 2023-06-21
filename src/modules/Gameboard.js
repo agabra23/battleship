@@ -104,6 +104,12 @@ const Gameboard = function () {
     return boardArray[x][y] !== "none";
   };
 
+  const getShip = (coordinates) => {
+    const [x, y] = coordinates;
+
+    return boardArray[x][y];
+  };
+
   return {
     placeShip,
     boardArray,
@@ -114,6 +120,7 @@ const Gameboard = function () {
     resetGameboard,
     initBoard,
     isShip,
+    getShip,
   };
 };
 
