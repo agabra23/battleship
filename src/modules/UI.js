@@ -6,14 +6,16 @@ const UI = (() => {
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
 
-    playerBoard.boardArray.forEach((row) => {
+    playerBoard.boardArray.forEach((row, rowIndex) => {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("rowDiv");
 
-      row.forEach((item) => {
+      row.forEach((item, cellIndex) => {
         const cell = document.createElement("div");
         cell.classList.add("boardCell");
+        cell.id = `${rowIndex},${cellIndex}`;
         if (item !== "none") cell.classList.add("shipCell");
+
         rowDiv.appendChild(cell);
       });
 
@@ -21,7 +23,19 @@ const UI = (() => {
     });
   };
 
-  return { renderBoard };
+  const attempt = (coordinates, gameboard) => {
+    const [x, y] = coordinates;
+    const targetCell = document.getElementById(`${x},${y}`);
+    const isShip = gameboard.isShip(coordinates);
+
+    if (isShip) {
+      targetCell.innerHTML = "Hit";
+    } else {
+      targetCell.innerHTML = "Miss";
+    }
+  };
+
+  return { renderBoard, attempt };
 })();
 
 export default UI;

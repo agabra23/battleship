@@ -98,6 +98,12 @@ const Gameboard = function () {
     ships.push(ship);
   };
 
+  const isShip = (coordinates) => {
+    const [x, y] = coordinates;
+
+    return boardArray[x][y] !== "none";
+  };
+
   return {
     placeShip,
     boardArray,
@@ -107,6 +113,7 @@ const Gameboard = function () {
     addShip,
     resetGameboard,
     initBoard,
+    isShip,
   };
 };
 
