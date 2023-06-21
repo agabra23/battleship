@@ -8,4 +8,4 @@ game.initGame();
 console.log("start");
 UI.renderBoard(game.computerBoard);
 
-game.playRound(game.userPlayer);
+game.playRound(game.currentPlayer);

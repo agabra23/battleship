@@ -9,6 +9,8 @@ const game = (() => {
   const userPlayer = Player("user");
   const userBoard = Gameboard();
 
+  let currentPlayer = userPlayer;
+
   const initGame = () => {
     console.log("init");
     userBoard.initBoard();
@@ -22,13 +24,23 @@ const game = (() => {
     }
   };
 
+  const switchTurn = () => {
+    if (currentPlayer === userPlayer) {
+      currentPlayer = computerPlayer;
+    } else {
+      currentPlayer = userPlayer;
+    }
+  };
+
   return {
     initGame,
     playRound,
+    switchTurn,
     computerBoard,
     computerPlayer,
     userBoard,
     userPlayer,
+    currentPlayer,
   };
 })();
 
