@@ -12,7 +12,5 @@ const allCells = document.querySelectorAll(".boardCell");
 allCells.forEach((cell) => {
   cell.addEventListener("click", () => {
     game.moveEvent(cell);
-
-    game.checkLoss(game.computerPlayer);
   });
 });
