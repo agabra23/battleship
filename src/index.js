@@ -13,6 +13,6 @@ allCells.forEach((cell) => {
   cell.addEventListener("click", () => {
     game.moveEvent(cell);
 
-    if (game.checkLoss(game.computerPlayer)) alert("win");
+    game.checkLoss(game.computerPlayer);
   });
 });

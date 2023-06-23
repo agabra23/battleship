@@ -34,9 +34,11 @@ const game = (() => {
   };
 
   const checkLoss = (player) => {
-    return player.board.ships.every((ship) => {
+    const allSunk = player.board.ships.every((ship) => {
       return ship.isSunk();
     });
+
+    if (allSunk) alert("win");
   };
 
   const moveEvent = (cell) => {
