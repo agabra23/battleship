@@ -4,8 +4,21 @@ import game from "./modules/game.js";
 import UI from "./modules/UI.js";
 
 game.initGame();
-
-console.log("start");
 UI.renderBoard(game.computerPlayer.board);
 
 game.playRound(game.currentPlayer);
+
+const allCells = document.querySelectorAll(".boardCell");
+allCells.forEach((cell) => {
+  cell.addEventListener("click", () => {
+    console.log("click");
+    game.computerPlayer.board.receiveAttack([cell.dataset.x, cell.dataset.y]);
+    console.log(
+      game.computerPlayer.board
+        .getShip([cell.dataset.x, cell.dataset.y])
+        .isSunk()
+    );
+
+    if (game.checkLoss(game.computerPlayer)) alert("win");
+  });
+});

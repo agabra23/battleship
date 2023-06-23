@@ -33,7 +33,7 @@ const game = (() => {
     }
   };
 
-  const checkWin = (player) => {
+  const checkLoss = (player) => {
     return player.board.ships.every((ship) => {
       return ship.isSunk();
     });
@@ -46,7 +46,7 @@ const game = (() => {
     computerPlayer,
     userPlayer,
     currentPlayer,
-    checkWin,
+    checkLoss,
   };
 })();
 

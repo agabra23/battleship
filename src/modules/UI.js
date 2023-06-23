@@ -14,6 +14,9 @@ const UI = (() => {
         const cell = document.createElement("div");
         cell.classList.add("boardCell");
         cell.id = `${rowIndex},${cellIndex}`;
+        cell.dataset.board = playerBoard;
+        cell.dataset.x = rowIndex;
+        cell.dataset.y = cellIndex;
         if (item !== "none") cell.classList.add("shipCell");
 
         rowDiv.appendChild(cell);

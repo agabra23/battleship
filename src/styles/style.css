@@ -26,6 +26,15 @@ h1 {
   align-items: center;
 }
 
+.boardCell:hover {
+  background-color: #b0b0b05c;
+  cursor: pointer;
+}
+
 .boardCell.shipCell {
   background-color: red;
+}
+
+.boardCell.shipCell:hover {
+  background-color: rgba(255, 0, 0, 0.65);
 }

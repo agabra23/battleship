@@ -29,6 +29,6 @@ const Ship = function (path) {
     hits = 0;
   };
 
-  return { getLength, isSunk, hit, getHits, getPath, resetHits };
+  return { getLength, isSunk, hit, getHits, getPath, resetHits, hits };
 };
 export default Ship;

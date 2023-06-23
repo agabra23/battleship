@@ -28,14 +28,7 @@ const Gameboard = function () {
         [7, 2],
       ])
     );
-    placeShip(
-      Ship([
-        [4, 2],
-        [5, 2],
-        [6, 2],
-        [7, 2],
-      ])
-    );
+
     placeShip(
       Ship([
         [8, 3],
