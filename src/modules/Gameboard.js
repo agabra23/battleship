@@ -121,6 +121,7 @@ const Gameboard = function () {
     initBoard,
     isShip,
     getShip,
+    ships,
   };
 };
 

@@ -6,6 +6,6 @@ import UI from "./modules/UI.js";
 game.initGame();
 
 console.log("start");
-UI.renderBoard(game.computerBoard);
+UI.renderBoard(game.computerPlayer.board);
 
 game.playRound(game.currentPlayer);

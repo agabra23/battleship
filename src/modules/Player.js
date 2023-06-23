@@ -1,6 +1,9 @@
+import Gameboard from "./Gameboard";
+
 const Player = (type) => {
   const attempts = [];
   const turn = false;
+  const board = Gameboard();
 
   const attempt = (coordinates) => {
     attempts.push(coordinates);
@@ -30,9 +33,9 @@ const Player = (type) => {
     return move;
   };
 
-  if (type === "computer") return { attempt, generateMove };
+  if (type === "computer") return { attempt, generateMove, board };
 
-  return { attempt };
+  return { attempt, board };
 };
 
 export default Player;

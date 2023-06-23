@@ -1,26 +1,27 @@
 import Gameboard from "./Gameboard";
+import Ship from "./Ship";
 import Player from "./Player";
 import UI from "./UI";
 
 const game = (() => {
   const computerPlayer = Player("computer");
-  const computerBoard = Gameboard();
-
   const userPlayer = Player("user");
-  const userBoard = Gameboard();
 
   let currentPlayer = userPlayer;
 
   const initGame = () => {
     console.log("init");
-    userBoard.initBoard();
+
+    const userBoard = userPlayer.board;
+    const computerBoard = computerPlayer.board;
     computerBoard.initBoard();
+    userBoard.initBoard();
   };
 
-  const playRound = (player) => {
+  const playRound = (player, coordinates) => {
     if (player === userPlayer) {
-      computerBoard.receiveAttack([2, 3]);
-      UI.attempt([2, 3], computerBoard);
+      computerPlayer.board.receiveAttack([2, 3]);
+      UI.attempt([2, 3], computerPlayer.board);
     }
   };
 
@@ -32,15 +33,20 @@ const game = (() => {
     }
   };
 
+  const checkWin = (player) => {
+    return player.board.ships.every((ship) => {
+      return ship.isSunk();
+    });
+  };
+
   return {
     initGame,
     playRound,
     switchTurn,
-    computerBoard,
     computerPlayer,
-    userBoard,
     userPlayer,
     currentPlayer,
+    checkWin,
   };
 })();
 
