@@ -1,6 +1,6 @@
 import Ship from "./Ship.js";
 
-const Gameboard = function () {
+const Gameboard = function (type) {
   const boardArray = [...Array(10)].map((e) => Array(10).fill("none"));
   const hits = [];
   const misses = [];

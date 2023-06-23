@@ -3,7 +3,7 @@ import Gameboard from "./Gameboard";
 const Player = (type) => {
   const attempts = [];
   const turn = false;
-  const board = Gameboard();
+  const board = Gameboard(type);
 
   const attempt = (coordinates) => {
     attempts.push(coordinates);
