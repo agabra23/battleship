@@ -11,19 +11,7 @@ game.playRound(game.currentPlayer);
 const allCells = document.querySelectorAll(".boardCell");
 allCells.forEach((cell) => {
   cell.addEventListener("click", () => {
-    const cellBoard =
-      cell.dataset.board === "computer"
-        ? game.computerPlayer.board
-        : game.userPlayer.board;
-
-    game.computerPlayer.board.receiveAttack([cell.dataset.x, cell.dataset.y]);
-    console.log(
-      game.computerPlayer.board
-        .getShip([cell.dataset.x, cell.dataset.y])
-        .isSunk()
-    );
-
-    UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
+    game.moveEvent(cell);
 
     if (game.checkLoss(game.computerPlayer)) alert("win");
   });

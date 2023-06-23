@@ -39,6 +39,16 @@ const game = (() => {
     });
   };
 
+  const moveEvent = (cell) => {
+    const cellBoard =
+      cell.dataset.board === "computer"
+        ? game.computerPlayer.board
+        : game.userPlayer.board;
+
+    game.computerPlayer.board.receiveAttack([cell.dataset.x, cell.dataset.y]);
+    UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
+  };
+
   return {
     initGame,
     playRound,
@@ -47,6 +57,7 @@ const game = (() => {
     userPlayer,
     currentPlayer,
     checkLoss,
+    moveEvent,
   };
 })();
 
