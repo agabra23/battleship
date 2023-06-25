@@ -6,8 +6,6 @@ import UI from "./modules/UI.js";
 game.initGame();
 UI.renderBoard(game.computerPlayer.board);
 
-game.playRound(game.currentPlayer);
-
 const allCells = document.querySelectorAll(".boardCell");
 allCells.forEach((cell) => {
   cell.addEventListener("click", () => {

@@ -13,7 +13,7 @@ const UI = (() => {
       row.forEach((item, cellIndex) => {
         const cell = document.createElement("div");
         cell.classList.add("boardCell");
-        cell.id = `${rowIndex},${cellIndex}`;
+        cell.id = `${playerBoard.type} - ${rowIndex},${cellIndex}`;
         cell.dataset.board = playerBoard.type;
         cell.dataset.x = rowIndex;
         cell.dataset.y = cellIndex;
@@ -28,7 +28,7 @@ const UI = (() => {
 
   const attempt = (coordinates, gameboard) => {
     const [x, y] = coordinates;
-    const targetCell = document.getElementById(`${x},${y}`);
+    const targetCell = document.getElementById(`${gameboard.type} - ${x},${y}`);
     const isShip = gameboard.isShip(coordinates);
 
     if (isShip) {

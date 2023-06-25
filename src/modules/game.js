@@ -18,13 +18,6 @@ const game = (() => {
     userBoard.initBoard();
   };
 
-  const playRound = (player, coordinates) => {
-    if (player === userPlayer) {
-      computerPlayer.board.receiveAttack([2, 3]);
-      UI.attempt([2, 3], computerPlayer.board);
-    }
-  };
-
   const switchTurn = () => {
     if (currentPlayer === userPlayer) {
       currentPlayer = computerPlayer;
