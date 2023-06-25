@@ -4,7 +4,7 @@ import game from "./modules/game.js";
 import UI from "./modules/UI.js";
 
 game.initGame();
-UI.renderBoard(game.computerPlayer.board);
+UI.renderBoard(game.currentPlayer.board);
 
 const allCells = document.querySelectorAll(".boardCell");
 allCells.forEach((cell) => {

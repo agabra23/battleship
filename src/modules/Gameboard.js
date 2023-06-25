@@ -115,6 +115,7 @@ const Gameboard = function (type) {
     isShip,
     getShip,
     ships,
+    type,
   };
 };
 

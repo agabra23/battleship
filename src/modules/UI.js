@@ -5,6 +5,13 @@ import Ship from "./Ship";
 const UI = (() => {
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
+    board.innerHTML = "";
+
+    const playerTitle = document.createElement("h3");
+    console.log(playerBoard);
+    playerTitle.innerHTML = `${playerBoard.type}`;
+
+    board.appendChild(playerTitle);
 
     playerBoard.boardArray.forEach((row, rowIndex) => {
       const rowDiv = document.createElement("div");

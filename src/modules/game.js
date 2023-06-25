@@ -43,11 +43,11 @@ const game = (() => {
     game.computerPlayer.board.receiveAttack([cell.dataset.x, cell.dataset.y]);
     UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
     checkLoss(game.computerPlayer);
+    switchTurn();
   };
 
   return {
     initGame,
-    playRound,
     switchTurn,
     computerPlayer,
     userPlayer,
