@@ -26,6 +26,11 @@ const UI = (() => {
         cell.dataset.y = cellIndex;
         if (item !== "none") cell.classList.add("shipCell");
 
+        // if playerBoard.misses contains rowIndex, cellIndex
+        //  text content = 'miss'
+        // else if playerBoard.hits contains rowIndex, cellIndex
+        //  text content = 'hits'
+
         rowDiv.appendChild(cell);
       });
 
