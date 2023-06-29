@@ -4,24 +4,24 @@ import Ship from "./Ship";
 import game from "./game";
 
 const UI = (() => {
-  const renderStart = () => {
-    const nextTurnBtn = document.getElementById("switchTurnBtn");
-    nextTurnBtn.style.display = "none";
+  // const renderStart = () => {
+  //   const nextTurnBtn = document.getElementById("switchTurnBtn");
+  //   nextTurnBtn.style.display = "none";
 
-    const board = document.getElementById("board");
-    board.style.display = "none";
+  //   const board = document.getElementById("board");
+  //   board.style.display = "none";
 
-    const startScreen = document.getElementById("startScreen");
+  //   const startScreen = document.getElementById("startScreen");
 
-    const startBtn = document.createElement("button");
-    startBtn.textContent = "Start Game";
+  //   const startBtn = document.createElement("button");
+  //   startBtn.textContent = "Start Game";
 
-    startScreen.appendChild(startBtn);
+  //   startScreen.appendChild(startBtn);
 
-    startBtn.onclick = () => {
-      UI.renderBoard(game.currentPlayer.board);
-    };
-  };
+  //   startBtn.onclick = () => {
+  //     UI.renderBoard(game.currentPlayer.board);
+  //   };
+  // };
 
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
@@ -131,7 +131,7 @@ const UI = (() => {
     stopClicks,
     startClicks,
     styleSunk,
-    renderStart,
+    // renderStart,
   };
 })();
 
