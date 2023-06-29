@@ -51,6 +51,6 @@ h1 {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  opacity: 50%;
-  background-color: black;
+  /* opacity: 50%;
+  background-color: black; */
 }
