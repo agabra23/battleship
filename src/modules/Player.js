@@ -33,9 +33,9 @@ const Player = (type) => {
     return move;
   };
 
-  if (type === "computer") return { attempt, generateMove, board };
+  if (type === "computer") return { attempt, generateMove, board, type };
 
-  return { attempt, board };
+  return { attempt, board, type };
 };
 
 export default Player;

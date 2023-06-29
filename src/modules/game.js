@@ -7,11 +7,9 @@ const game = (() => {
   const computerPlayer = Player("computer");
   const userPlayer = Player("user");
 
-  let currentPlayer = userPlayer;
+  let currentPlayer = computerPlayer;
 
   const initGame = () => {
-    console.log("init");
-
     const userBoard = userPlayer.board;
     const computerBoard = computerPlayer.board;
     computerBoard.initBoard();
@@ -19,11 +17,14 @@ const game = (() => {
   };
 
   const switchTurn = () => {
-    if (currentPlayer === userPlayer) {
-      currentPlayer = computerPlayer;
+    console.log("start switch", game.currentPlayer.type);
+    if (game.currentPlayer === userPlayer) {
+      game.currentPlayer = computerPlayer;
     } else {
-      currentPlayer = userPlayer;
+      game.currentPlayer = userPlayer;
     }
+
+    console.log("end switch", game.currentPlayer.type);
   };
 
   const checkLoss = (player) => {
@@ -35,15 +36,16 @@ const game = (() => {
   };
 
   const moveEvent = (cell) => {
+    UI.stopClicks();
     const cellBoard =
       cell.dataset.board === "computer"
-        ? game.computerPlayer.board
-        : game.userPlayer.board;
+        ? computerPlayer.board
+        : userPlayer.board;
 
-    game.computerPlayer.board.receiveAttack([cell.dataset.x, cell.dataset.y]);
+    cellBoard.receiveAttack([cell.dataset.x, cell.dataset.y]);
     UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
-    checkLoss(game.computerPlayer);
-    switchTurn();
+    checkLoss(currentPlayer);
+    game.switchTurn();
   };
 
   return {

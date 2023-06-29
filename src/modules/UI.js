@@ -1,11 +1,12 @@
 import Gameboard from "./Gameboard";
 import Player from "./Player";
 import Ship from "./Ship";
+import game from "./game";
 
 const UI = (() => {
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
-    board.innerHTML = "";
+    board.innerHTML = `<div id="overlay"></div>`;
 
     const playerTitle = document.createElement("h3");
     console.log(playerBoard);
@@ -26,15 +27,23 @@ const UI = (() => {
         cell.dataset.y = cellIndex;
         if (item !== "none") cell.classList.add("shipCell");
 
-        // if playerBoard.misses contains rowIndex, cellIndex
-        //  text content = 'miss'
-        // else if playerBoard.hits contains rowIndex, cellIndex
-        //  text content = 'hits'
+        cell.addEventListener("click", (e) => {
+          // adjust this. Maybe make it a playRound thing to kick off a round and end it with a turn switch.
+          e.stopPropagation();
+          game.moveEvent(cell);
+        });
 
         rowDiv.appendChild(cell);
       });
 
       board.appendChild(rowDiv);
+    });
+
+    playerBoard.misses.forEach((coordinates) => {
+      attempt(coordinates, playerBoard);
+    });
+    playerBoard.hits.forEach((coordinates) => {
+      attempt(coordinates, playerBoard);
     });
   };
 
@@ -50,7 +59,19 @@ const UI = (() => {
     }
   };
 
-  return { renderBoard, attempt };
+  const stopClicks = () => {
+    const overlay = document.getElementById("overlay");
+
+    overlay.style.pointerEvents = "all";
+  };
+
+  const startClicks = () => {
+    const overlay = document.getElementById("overlay");
+
+    overlay.style.pointerEvents = "none";
+  };
+
+  return { renderBoard, attempt, stopClicks, startClicks };
 })();
 
 export default UI;
