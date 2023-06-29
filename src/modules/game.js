@@ -44,6 +44,7 @@ const game = (() => {
 
     cellBoard.receiveAttack([cell.dataset.x, cell.dataset.y]);
     UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
+    UI.styleSunk(cellBoard.type);
     checkLoss(currentPlayer);
     game.switchTurn();
   };

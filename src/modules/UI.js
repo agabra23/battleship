@@ -25,7 +25,13 @@ const UI = (() => {
         cell.dataset.board = playerBoard.type;
         cell.dataset.x = rowIndex;
         cell.dataset.y = cellIndex;
-        if (item !== "none") cell.classList.add("shipCell");
+        if (item !== "none") {
+          cell.classList.add("shipCell");
+
+          if (item.isSunk()) {
+            cell.style.backgroundColor = "red";
+          }
+        }
 
         cell.addEventListener("click", (e) => {
           // adjust this. Maybe make it a playRound thing to kick off a round and end it with a turn switch.
@@ -71,7 +77,29 @@ const UI = (() => {
     overlay.style.pointerEvents = "none";
   };
 
-  return { renderBoard, attempt, stopClicks, startClicks };
+  const styleSunk = (boardType) => {
+    const rows = document.querySelectorAll(".rowDiv");
+    rows.forEach((row) => {
+      const cells = document.querySelectorAll(".boardCell");
+      cells.forEach((cell) => {
+        const [x, y] = [cell.dataset.x, cell.dataset.y];
+
+        if (boardType === "User") {
+          if (game.userPlayer.board.isShip([x, y])) {
+            const ship = game.userPlayer.board.getShip([x, y]);
+            if (ship.isSunk()) cell.style.backgroundColor = "red";
+          }
+        } else {
+          if (game.computerPlayer.board.isShip([x, y])) {
+            const ship = game.computerPlayer.board.getShip([x, y]);
+            if (ship.isSunk()) cell.style.backgroundColor = "red";
+          }
+        }
+      });
+    });
+  };
+
+  return { renderBoard, attempt, stopClicks, startClicks, styleSunk };
 })();
 
 export default UI;
