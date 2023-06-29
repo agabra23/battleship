@@ -25,7 +25,6 @@ const UI = (() => {
 
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
-    board.style.display = "flex";
     board.innerHTML = `<div id="overlay"></div>`;
 
     const startScreen = document.getElementById("startScreen");
