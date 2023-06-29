@@ -4,34 +4,9 @@ import Ship from "./Ship";
 import game from "./game";
 
 const UI = (() => {
-  // const renderStart = () => {
-  //   const nextTurnBtn = document.getElementById("switchTurnBtn");
-  //   nextTurnBtn.style.display = "none";
-
-  //   const board = document.getElementById("board");
-  //   board.style.display = "none";
-
-  //   const startScreen = document.getElementById("startScreen");
-
-  //   const startBtn = document.createElement("button");
-  //   startBtn.textContent = "Start Game";
-
-  //   startScreen.appendChild(startBtn);
-
-  //   startBtn.onclick = () => {
-  //     UI.renderBoard(game.currentPlayer.board);
-  //   };
-  // };
-
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
     board.innerHTML = `<div id="overlay"></div>`;
-
-    const startScreen = document.getElementById("startScreen");
-    startScreen.style.display = "none";
-
-    const nextTurnBtn = document.getElementById("switchTurnBtn");
-    nextTurnBtn.style.display = "block";
 
     const playerTitle = document.createElement("h3");
     console.log(playerBoard);
@@ -50,7 +25,13 @@ const UI = (() => {
         cell.dataset.board = playerBoard.type;
         cell.dataset.x = rowIndex;
         cell.dataset.y = cellIndex;
-        if (item !== "none") cell.classList.add("shipCell");
+        if (item !== "none") {
+          cell.classList.add("shipCell");
+
+          if (item.isSunk()) {
+            cell.style.backgroundColor = "red";
+          }
+        }
 
         cell.addEventListener("click", (e) => {
           // adjust this. Maybe make it a playRound thing to kick off a round and end it with a turn switch.
