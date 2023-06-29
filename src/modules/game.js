@@ -1,27 +1,25 @@
-import Gameboard from "./Gameboard";
-import Ship from "./Ship";
 import Player from "./Player";
 import UI from "./UI";
 
 const game = (() => {
-  const computerPlayer = Player("Computer");
-  const userPlayer = Player("User");
+  const playerOne = Player("Player 1");
+  const playerTwo = Player("Player 2");
 
-  let currentPlayer = computerPlayer;
+  let currentPlayer = playerOne;
 
   const initGame = () => {
-    const userBoard = userPlayer.board;
-    const computerBoard = computerPlayer.board;
+    const userBoard = playerTwo.board;
+    const computerBoard = playerOne.board;
     computerBoard.initBoard();
     userBoard.initBoard();
   };
 
   const switchTurn = () => {
     console.log("start switch", game.currentPlayer.type);
-    if (game.currentPlayer === userPlayer) {
-      game.currentPlayer = computerPlayer;
+    if (game.currentPlayer === playerTwo) {
+      game.currentPlayer = playerOne;
     } else {
-      game.currentPlayer = userPlayer;
+      game.currentPlayer = playerTwo;
     }
 
     console.log("end switch", game.currentPlayer.type);
@@ -38,9 +36,7 @@ const game = (() => {
   const moveEvent = (cell) => {
     UI.stopClicks();
     const cellBoard =
-      cell.dataset.board === "Computer"
-        ? computerPlayer.board
-        : userPlayer.board;
+      cell.dataset.board === "Computer" ? playerOne.board : playerTwo.board;
 
     cellBoard.receiveAttack([cell.dataset.x, cell.dataset.y]);
     UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
@@ -52,8 +48,8 @@ const game = (() => {
   return {
     initGame,
     switchTurn,
-    computerPlayer,
-    userPlayer,
+    playerOne,
+    playerTwo,
     currentPlayer,
     checkLoss,
     moveEvent,

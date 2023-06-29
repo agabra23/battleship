@@ -4,9 +4,35 @@ import Ship from "./Ship";
 import game from "./game";
 
 const UI = (() => {
+  const renderStart = () => {
+    const nextTurnBtn = document.getElementById("switchTurnBtn");
+    nextTurnBtn.style.display = "none";
+
+    const board = document.getElementById("board");
+    board.style.display = "none";
+
+    const startScreen = document.getElementById("startScreen");
+
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "Start Game";
+
+    startScreen.appendChild(startBtn);
+
+    startBtn.onclick = () => {
+      UI.renderBoard(game.currentPlayer.board);
+    };
+  };
+
   const renderBoard = (playerBoard) => {
     const board = document.getElementById("board");
+    board.style.display = "flex";
     board.innerHTML = `<div id="overlay"></div>`;
+
+    const startScreen = document.getElementById("startScreen");
+    startScreen.style.display = "none";
+
+    const nextTurnBtn = document.getElementById("switchTurnBtn");
+    nextTurnBtn.style.display = "block";
 
     const playerTitle = document.createElement("h3");
     console.log(playerBoard);
@@ -99,7 +125,14 @@ const UI = (() => {
     });
   };
 
-  return { renderBoard, attempt, stopClicks, startClicks, styleSunk };
+  return {
+    renderBoard,
+    attempt,
+    stopClicks,
+    startClicks,
+    styleSunk,
+    renderStart,
+  };
 })();
 
 export default UI;
