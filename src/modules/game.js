@@ -4,8 +4,8 @@ import Player from "./Player";
 import UI from "./UI";
 
 const game = (() => {
-  const computerPlayer = Player("computer");
-  const userPlayer = Player("user");
+  const computerPlayer = Player("Computer");
+  const userPlayer = Player("User");
 
   let currentPlayer = computerPlayer;
 
@@ -38,7 +38,7 @@ const game = (() => {
   const moveEvent = (cell) => {
     UI.stopClicks();
     const cellBoard =
-      cell.dataset.board === "computer"
+      cell.dataset.board === "Computer"
         ? computerPlayer.board
         : userPlayer.board;
 

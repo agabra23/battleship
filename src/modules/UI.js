@@ -10,7 +10,7 @@ const UI = (() => {
 
     const playerTitle = document.createElement("h3");
     console.log(playerBoard);
-    playerTitle.innerHTML = `${playerBoard.type}`;
+    playerTitle.innerHTML = `${playerBoard.type}'s Turn`;
 
     board.appendChild(playerTitle);
 
