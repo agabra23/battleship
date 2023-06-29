@@ -50,13 +50,7 @@ const UI = (() => {
         cell.dataset.board = playerBoard.type;
         cell.dataset.x = rowIndex;
         cell.dataset.y = cellIndex;
-        if (item !== "none") {
-          cell.classList.add("shipCell");
-
-          if (item.isSunk()) {
-            cell.style.backgroundColor = "red";
-          }
-        }
+        if (item !== "none") cell.classList.add("shipCell");
 
         cell.addEventListener("click", (e) => {
           // adjust this. Maybe make it a playRound thing to kick off a round and end it with a turn switch.
@@ -124,14 +118,7 @@ const UI = (() => {
     });
   };
 
-  return {
-    renderBoard,
-    attempt,
-    stopClicks,
-    startClicks,
-    styleSunk,
-    // renderStart,
-  };
+  return { renderBoard, attempt, stopClicks, startClicks, styleSunk };
 })();
 
 export default UI;
