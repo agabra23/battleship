@@ -30,7 +30,7 @@ const UI = (() => {
         cell.addEventListener("click", (e) => {
           // adjust this. Maybe make it a playRound thing to kick off a round and end it with a turn switch.
           e.stopPropagation();
-          game.moveEvent(cell);
+          if (cell.textContent === "") game.moveEvent(cell);
         });
 
         rowDiv.appendChild(cell);
