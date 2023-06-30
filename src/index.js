@@ -6,6 +6,7 @@ import UI from "./modules/UI.js";
 game.initGame();
 const switchTurnBtn = document.getElementById("switchTurnBtn");
 UI.renderBoard(game.currentPlayer.board);
+UI.renderStart();
 
 switchTurnBtn.onclick = () => {
   UI.startClicks();
