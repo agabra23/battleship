@@ -20,8 +20,6 @@ const UI = (() => {
     const nextTurnBtn = document.getElementById("switchTurnBtn");
     nextTurnBtn.style.display = "none";
 
-    generateGrid();
-
     startButton.onclick = () => {
       startEvent(startScreen);
       startButton.style.display = "none";
@@ -29,7 +27,7 @@ const UI = (() => {
   };
 
   const startEvent = (element) => {
-    toggleActive(element);
+    element.style.display = "";
 
     const board = document.getElementById("board");
     board.style.display = "";
@@ -133,14 +131,11 @@ const UI = (() => {
     });
   };
 
-  const toggleActive = (element) => {
-    element.classList.toggle("active");
-  };
-
   // Choose Ship Locations
 
   const generateGrid = () => {
     const startScreen = document.getElementById("startScreen");
+    startScreen.style.display = "flex";
 
     for (let i = 0; i < 10; i++) {
       const rowDiv = document.createElement("div");
