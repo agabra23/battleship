@@ -6,7 +6,7 @@ import game from "./game";
 const UI = (() => {
   const renderStart = () => {
     const startScreen = document.getElementById("startScreen");
-    startScreen.style.display = "block";
+    startScreen.style.display = "flex";
 
     const startButton = document.createElement("button");
     startButton.id = "startBtn";
@@ -19,6 +19,8 @@ const UI = (() => {
 
     const nextTurnBtn = document.getElementById("switchTurnBtn");
     nextTurnBtn.style.display = "none";
+
+    generateGrid();
 
     startButton.onclick = () => {
       startEvent(startScreen);
@@ -133,6 +135,28 @@ const UI = (() => {
 
   const toggleActive = (element) => {
     element.classList.toggle("active");
+  };
+
+  // Choose Ship Locations
+
+  const generateGrid = () => {
+    const startScreen = document.getElementById("startScreen");
+
+    for (let i = 0; i < 10; i++) {
+      const rowDiv = document.createElement("div");
+      rowDiv.classList.add("rowDiv");
+
+      for (let j = 0; j < 10; j++) {
+        const cell = document.createElement("div");
+        cell.classList.add("boardCell");
+        rowDiv.appendChild(cell);
+
+        cell.dataset.x = i;
+        cell.dataset.y = j;
+      }
+
+      startScreen.appendChild(rowDiv);
+    }
   };
 
   return {
