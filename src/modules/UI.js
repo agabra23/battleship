@@ -141,6 +141,10 @@ const UI = (() => {
     const startScreen = document.getElementById("startScreen");
     startScreen.style.display = "flex";
 
+    const flipButton = document.createElement("button");
+    flipButton.textContent = "Flip Ship Direction";
+    flipButton.id = "flipBtn";
+
     const startButton = document.createElement("button");
     startButton.id = "startBtn";
     startButton.textContent = "Start Game";
@@ -218,12 +222,15 @@ const UI = (() => {
 
       startScreen.appendChild(rowDiv);
       startScreen.appendChild(chooseShip);
+      startScreen.appendChild(flipButton);
       startScreen.appendChild(startButton);
 
       startButton.onclick = () => {
         startEvent(startScreen);
         startButton.style.display = "none";
       };
+
+      flipButton.onclick = flip;
     }
   };
 
@@ -258,6 +265,10 @@ const UI = (() => {
         return selectCell;
       }
     }
+  };
+
+  const flip = () => {
+    isVertical = !isVertical;
   };
 
   return {
