@@ -47,6 +47,30 @@ const game = (() => {
     UI.styleSunk(cellBoard.type);
     checkLoss(currentPlayer);
     game.switchTurn();
+    UI.toggleTurnBtn();
+  };
+
+  const computerMoveEvent = async () => {
+    UI.stopClicks();
+
+    const delay = (milliseconds) => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
+      });
+    };
+
+    await delay(750);
+
+    console.log("after 1 sec");
+    const coordinates = game.computerPlayer.generateMove();
+
+    const cellBoard = game.computerPlayer.board;
+    cellBoard.receiveAttack(coordinates);
+    UI.attempt(coordinates, cellBoard);
+    UI.styleSunk(cellBoard.type);
+    game.checkLoss(game.currentPlayer);
+    game.switchTurn();
+    UI.toggleTurnBtn();
   };
 
   return {
@@ -57,6 +81,7 @@ const game = (() => {
     currentPlayer,
     checkLoss,
     moveEvent,
+    computerMoveEvent,
   };
 })();
 

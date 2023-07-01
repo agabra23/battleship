@@ -131,6 +131,11 @@ const UI = (() => {
     });
   };
 
+  const toggleTurnBtn = () => {
+    const switchTurnBtn = document.getElementById("switchTurnBtn");
+    switchTurnBtn.disabled = !switchTurnBtn.disabled;
+  };
+
   // Choose Ship Locations
 
   const generateGrid = () => {
@@ -161,6 +166,7 @@ const UI = (() => {
     startClicks,
     styleSunk,
     renderStart,
+    toggleTurnBtn,
   };
 })();
 
