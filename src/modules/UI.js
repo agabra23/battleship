@@ -8,12 +8,6 @@ const UI = (() => {
     const startScreen = document.getElementById("startScreen");
     startScreen.style.display = "flex";
 
-    const startButton = document.createElement("button");
-    startButton.id = "startBtn";
-    startButton.textContent = "Start Game";
-
-    startScreen.appendChild(startButton);
-
     const board = document.getElementById("board");
     board.style.display = "none";
 
@@ -21,11 +15,6 @@ const UI = (() => {
     nextTurnBtn.style.display = "none";
 
     generateGrid();
-
-    startButton.onclick = () => {
-      startEvent(startScreen);
-      startButton.style.display = "none";
-    };
   };
 
   const startEvent = (element) => {
@@ -73,7 +62,6 @@ const UI = (() => {
         }
 
         cell.addEventListener("click", (e) => {
-          // adjust this. Maybe make it a playRound thing to kick off a round and end it with a turn switch.
           e.stopPropagation();
           if (cell.textContent === "") game.moveEvent(cell);
         });
@@ -145,16 +133,21 @@ const UI = (() => {
 
   // Choose Ship Locations
 
-  const isVertical = true;
+  let isVertical = true;
   const shipLengths = [2, 3, 4, 5];
-  const currentShipLength = 5;
+  let currentShipLength = 5;
 
   const generateGrid = () => {
     const startScreen = document.getElementById("startScreen");
     startScreen.style.display = "flex";
 
+    const startButton = document.createElement("button");
+    startButton.id = "startBtn";
+    startButton.textContent = "Start Game";
+
     const chooseShip = document.createElement("h3");
     chooseShip.textContent = `Choose ${currentShipLength} Coordinates`;
+    chooseShip.id = "chooseShip";
 
     for (let i = 0; i < 10; i++) {
       const rowDiv = document.createElement("div");
@@ -219,12 +212,37 @@ const UI = (() => {
           game.computerPlayer.board.placeShip(Ship(shipCoordinates));
 
           console.log("placed");
-          // nextShip();
+          nextShip();
         };
       }
 
       startScreen.appendChild(rowDiv);
       startScreen.appendChild(chooseShip);
+      startScreen.appendChild(startButton);
+
+      startButton.onclick = () => {
+        startEvent(startScreen);
+        startButton.style.display = "none";
+      };
+    }
+  };
+
+  const nextShip = () => {
+    const chooseShip = document.getElementById("chooseShip");
+
+    if (
+      shipLengths.find((length) => {
+        return length === currentShipLength - 1;
+      })
+    ) {
+      currentShipLength--;
+      chooseShip.textContent = `Choose ${currentShipLength} Coordinates`;
+    } else {
+      const cells = document.querySelectorAll(".selectCell");
+      cells.forEach((cell) => {
+        cell.style.pointerEvents = "none";
+      });
+      chooseShip.textContent = `Click "Start Game" to Begin.`;
     }
   };
 
