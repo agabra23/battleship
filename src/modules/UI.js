@@ -59,6 +59,11 @@ const UI = (() => {
         cell.dataset.board = playerBoard.type;
         cell.dataset.x = rowIndex;
         cell.dataset.y = cellIndex;
+
+        if (playerBoard === game.computerPlayer.board && item !== "none") {
+          cell.classList.add("selected");
+        }
+
         if (item !== "none") {
           cell.classList.add("shipCell");
 
