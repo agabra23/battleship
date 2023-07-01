@@ -142,7 +142,7 @@ const UI = (() => {
 
   const isVertical = true;
   const shipLengths = [2, 3, 4, 5];
-  const currentShipLength = 3;
+  const currentShipLength = 5;
 
   const generateGrid = () => {
     const startScreen = document.getElementById("startScreen");
@@ -160,16 +160,15 @@ const UI = (() => {
         cell.dataset.x = i;
         cell.dataset.y = j;
 
-        cell.onmouseenter = (e) => {
-          e.target.style.backgroundColor = "yellow";
+        cell.onmouseenter = () => {
+          cell.style.backgroundColor = "yellow";
           for (let k = 1; k < currentShipLength; k++) {
             const newCell = getSelectCell([i + k, j]);
             if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
-            console.log(newCell);
           }
         };
-        cell.onmouseout = (e) => {
-          e.target.style.backgroundColor = "";
+        cell.onmouseout = () => {
+          cell.style.backgroundColor = "";
           for (let k = 1; k < currentShipLength; k++) {
             const newCell = getSelectCell([i + k, j]);
             if (newCell !== undefined) newCell.style.backgroundColor = "";
