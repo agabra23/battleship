@@ -30,6 +30,8 @@ const Player = (type) => {
       move = [getRandomInt(9), getRandomInt(9)];
     }
 
+    attempt(move);
+
     return move;
   };
 

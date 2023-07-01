@@ -12,8 +12,8 @@ const game = (() => {
   const initGame = () => {
     const userBoard = userPlayer.board;
     const computerBoard = computerPlayer.board;
-    computerBoard.initBoard();
-    userBoard.initBoard();
+    // computerBoard.initBoard();
+    // userBoard.initBoard();
   };
 
   const switchTurn = () => {
@@ -28,11 +28,13 @@ const game = (() => {
   };
 
   const checkLoss = (player) => {
-    const allSunk = player.board.ships.every((ship) => {
-      return ship.isSunk();
-    });
+    const allSunk =
+      player.board.ships.length > 0 &&
+      player.board.ships.every((ship) => {
+        return ship.isSunk();
+      });
 
-    if (allSunk) alert("win");
+    if (allSunk) alert(`${currentPlayer.type} wins`);
   };
 
   const moveEvent = (cell) => {

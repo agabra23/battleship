@@ -148,6 +148,9 @@ const UI = (() => {
     const startScreen = document.getElementById("startScreen");
     startScreen.style.display = "flex";
 
+    const chooseShip = document.createElement("h3");
+    chooseShip.textContent = `Choose ${currentShipLength} Coordinates`;
+
     for (let i = 0; i < 10; i++) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("rowDiv");
@@ -180,6 +183,7 @@ const UI = (() => {
           let shipCoordinates = [
             [parseInt(cell.dataset.x), parseInt(cell.dataset.y)],
           ];
+
           for (let k = 1; k < currentShipLength; k++) {
             const newCell = getSelectCell([i + k, j]);
             shipCoordinates.push([
@@ -187,12 +191,15 @@ const UI = (() => {
               parseInt(newCell.dataset.y),
             ]);
           }
-          console.log(shipCoordinates);
+
+          game.computerPlayer.board.placeShip(Ship(shipCoordinates));
+          console.log("placed");
           // nextShip();
         };
       }
 
       startScreen.appendChild(rowDiv);
+      startScreen.appendChild(chooseShip);
     }
   };
 
