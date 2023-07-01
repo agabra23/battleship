@@ -20,6 +20,8 @@ const UI = (() => {
     const nextTurnBtn = document.getElementById("switchTurnBtn");
     nextTurnBtn.style.display = "none";
 
+    generateGrid();
+
     startButton.onclick = () => {
       startEvent(startScreen);
       startButton.style.display = "none";
@@ -138,6 +140,9 @@ const UI = (() => {
 
   // Choose Ship Locations
 
+  const isVertical = true;
+  const currentShipLength = 2;
+
   const generateGrid = () => {
     const startScreen = document.getElementById("startScreen");
     startScreen.style.display = "flex";
@@ -148,14 +153,39 @@ const UI = (() => {
 
       for (let j = 0; j < 10; j++) {
         const cell = document.createElement("div");
-        cell.classList.add("boardCell");
+        cell.classList.add("selectCell");
         rowDiv.appendChild(cell);
 
         cell.dataset.x = i;
         cell.dataset.y = j;
+
+        cell.onmouseenter = (e) => {
+          e.target.style.backgroundColor = "yellow";
+          const newCell = getSelectCell([i + 1, j]);
+          if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
+        };
+        cell.onmouseout = (e) => {
+          e.target.style.backgroundColor = "";
+          const newCell = getSelectCell([i + 1, j]);
+          if (newCell !== undefined) newCell.style.backgroundColor = "";
+        };
       }
 
       startScreen.appendChild(rowDiv);
+    }
+  };
+
+  const getSelectCell = (coordinates) => {
+    const [x, y] = coordinates;
+
+    const selectCells = document.querySelectorAll(".selectCell");
+    for (const selectCell of selectCells) {
+      if (
+        parseInt(selectCell.dataset.x) === x &&
+        parseInt(selectCell.dataset.y) === y
+      ) {
+        return selectCell;
+      }
     }
   };
 
