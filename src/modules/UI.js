@@ -160,18 +160,25 @@ const UI = (() => {
         cell.dataset.x = i;
         cell.dataset.y = j;
 
-        cell.onmouseenter = () => {
+        cell.onmouseenter = (e) => {
           cell.style.backgroundColor = "yellow";
           for (let k = 1; k < currentShipLength; k++) {
             const newCell = getSelectCell([i + k, j]);
             if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
           }
         };
-        cell.onmouseout = () => {
+        cell.onmouseout = (e) => {
           cell.style.backgroundColor = "";
           for (let k = 1; k < currentShipLength; k++) {
             const newCell = getSelectCell([i + k, j]);
             if (newCell !== undefined) newCell.style.backgroundColor = "";
+          }
+        };
+        cell.onclick = (e) => {
+          console.log(cell.dataset.x, cell.dataset.y);
+          for (let k = 1; k < currentShipLength; k++) {
+            const newCell = getSelectCell([i + k, j]);
+            console.log(newCell.dataset.x, newCell.dataset.y);
           }
         };
       }
