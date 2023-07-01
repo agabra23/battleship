@@ -166,7 +166,12 @@ const UI = (() => {
         cell.onmouseenter = (e) => {
           cell.style.backgroundColor = "yellow";
           for (let k = 1; k < currentShipLength; k++) {
-            const newCell = getSelectCell([i + k, j]);
+            let newCell = getSelectCell([i, j + k]);
+
+            if (isVertical) {
+              newCell = getSelectCell([i + k, j]);
+            }
+
             if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
           }
         };
@@ -174,7 +179,12 @@ const UI = (() => {
         cell.onmouseout = (e) => {
           cell.style.backgroundColor = "";
           for (let k = 1; k < currentShipLength; k++) {
-            const newCell = getSelectCell([i + k, j]);
+            let newCell = getSelectCell([i, j + k]);
+
+            if (isVertical) {
+              newCell = getSelectCell([i + k, j]);
+            }
+
             if (newCell !== undefined) newCell.style.backgroundColor = "";
           }
         };
@@ -184,8 +194,17 @@ const UI = (() => {
             [parseInt(cell.dataset.x), parseInt(cell.dataset.y)],
           ];
 
+          cell.classList.add("selected");
+
           for (let k = 1; k < currentShipLength; k++) {
-            const newCell = getSelectCell([i + k, j]);
+            let newCell = getSelectCell([i, j + k]);
+
+            if (isVertical) {
+              newCell = getSelectCell([i + k, j]);
+            }
+
+            newCell.classList.add("selected");
+            console.log(newCell.style.backgroundColor);
             shipCoordinates.push([
               parseInt(newCell.dataset.x),
               parseInt(newCell.dataset.y),
@@ -193,6 +212,7 @@ const UI = (() => {
           }
 
           game.computerPlayer.board.placeShip(Ship(shipCoordinates));
+
           console.log("placed");
           // nextShip();
         };
