@@ -75,6 +75,13 @@ const game = (() => {
     UI.toggleTurnBtn();
   };
 
+  const setComputerShips = () => {
+    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(2)));
+    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(3)));
+    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(4)));
+    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(5)));
+  };
+
   return {
     initGame,
     switchTurn,
@@ -84,6 +91,7 @@ const game = (() => {
     checkLoss,
     moveEvent,
     computerMoveEvent,
+    setComputerShips,
   };
 })();
 

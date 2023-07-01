@@ -35,7 +35,31 @@ const Player = (type) => {
     return move;
   };
 
-  return { attempt, board, type, generateMove };
+  const generateRandomPath = (shipLength) => {
+    const horizontal = Math.random() < 0.5; // Randomly choose horizontal or vertical placement
+    let x, y;
+
+    if (horizontal) {
+      x = Math.floor(Math.random() * (10 - shipLength + 1));
+      y = Math.floor(Math.random() * 10);
+    } else {
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * (10 - shipLength + 1));
+    }
+
+    const coordinates = [];
+    for (let i = 0; i < shipLength; i++) {
+      if (horizontal) {
+        coordinates.push([x + i, y]);
+      } else {
+        coordinates.push([x, y + i]);
+      }
+    }
+
+    return coordinates;
+  };
+
+  return { attempt, board, type, generateMove, generateRandomPath };
 };
 
 export default Player;

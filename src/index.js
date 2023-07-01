@@ -7,6 +7,7 @@ game.initGame();
 const switchTurnBtn = document.getElementById("switchTurnBtn");
 UI.renderBoard(game.currentPlayer.board);
 UI.renderStart();
+game.setComputerShips();
 
 switchTurnBtn.onclick = () => {
   UI.toggleTurnBtn();

@@ -165,8 +165,30 @@ const UI = (() => {
         cell.dataset.x = i;
         cell.dataset.y = j;
 
+        // const conflicting = (checkCell) => {
+        //   for (ship of game.computerPlayer.board.ships) {
+        //     for (coordinates of ship.path) {
+        //       if (
+        //         coordinates[0] === parseInt(checkCell.dataset.x) &&
+        //         coordinates[1] === parseInt(checkCell.dataset.y)
+        //       ) {
+        //         return true;
+        //       }
+        //     }
+        //   }
+        //   return false;
+        // };
+
+        const conflicting = (checkCell) => {
+          return game.computerPlayer.board.isShip([
+            checkCell.dataset.x,
+            checkCell.dataset.y,
+          ]);
+        };
+
         cell.onmouseenter = (e) => {
           cell.style.backgroundColor = "yellow";
+          if (conflicting(cell)) cell.style.backgroundColor = "black";
           for (let k = 1; k < currentShipLength; k++) {
             let newCell = getSelectCell([i, j + k]);
 
@@ -175,6 +197,7 @@ const UI = (() => {
             }
 
             if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
+            if (conflicting(newCell)) newCell.style.backgroundColor = "black";
           }
         };
 

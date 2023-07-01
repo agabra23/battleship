@@ -6,39 +6,39 @@ const Gameboard = function (type) {
   const misses = [];
   let ships = [];
 
-  const initBoard = () => {
-    placeShip(
-      Ship([
-        [1, 4],
-        [1, 5],
-      ])
-    );
-    placeShip(
-      Ship([
-        [6, 4],
-        [6, 5],
-        [6, 6],
-      ])
-    );
-    placeShip(
-      Ship([
-        [4, 2],
-        [5, 2],
-        [6, 2],
-        [7, 2],
-      ])
-    );
+  // const initBoard = () => {
+  //   placeShip(
+  //     Ship([
+  //       [1, 4],
+  //       [1, 5],
+  //     ])
+  //   );
+  //   placeShip(
+  //     Ship([
+  //       [6, 4],
+  //       [6, 5],
+  //       [6, 6],
+  //     ])
+  //   );
+  //   placeShip(
+  //     Ship([
+  //       [4, 2],
+  //       [5, 2],
+  //       [6, 2],
+  //       [7, 2],
+  //     ])
+  //   );
 
-    placeShip(
-      Ship([
-        [8, 3],
-        [8, 4],
-        [8, 5],
-        [8, 6],
-        [8, 7],
-      ])
-    );
-  };
+  //   placeShip(
+  //     Ship([
+  //       [8, 3],
+  //       [8, 4],
+  //       [8, 5],
+  //       [8, 6],
+  //       [8, 7],
+  //     ])
+  //   );
+  // };
 
   const resetGameboard = () => {
     hits = [];
@@ -102,7 +102,7 @@ const Gameboard = function (type) {
     misses,
     addShip,
     resetGameboard,
-    initBoard,
+    // initBoard,
     isShip,
     getShip,
     ships,
