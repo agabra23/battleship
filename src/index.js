@@ -12,4 +12,20 @@ switchTurnBtn.onclick = () => {
   UI.startClicks();
 
   UI.renderBoard(game.currentPlayer.board);
+
+  if (game.currentPlayer === game.computerPlayer) {
+    console.log("reaching");
+
+    const coordinates = game.computerPlayer.generateMove();
+    UI.stopClicks();
+
+    const cellBoard = game.computerPlayer.board;
+
+    cellBoard.receiveAttack(coordinates);
+    UI.attempt(coordinates, cellBoard);
+    UI.styleSunk(cellBoard.type);
+    game.checkLoss(game.currentPlayer);
+    game.switchTurn();
+    UI;
+  }
 };

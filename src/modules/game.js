@@ -7,7 +7,7 @@ const game = (() => {
   const computerPlayer = Player("Computer");
   const userPlayer = Player("User");
 
-  let currentPlayer = computerPlayer;
+  let currentPlayer = userPlayer;
 
   const initGame = () => {
     const userBoard = userPlayer.board;
