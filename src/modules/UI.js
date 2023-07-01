@@ -167,6 +167,7 @@ const UI = (() => {
             if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
           }
         };
+
         cell.onmouseout = (e) => {
           cell.style.backgroundColor = "";
           for (let k = 1; k < currentShipLength; k++) {
@@ -174,12 +175,20 @@ const UI = (() => {
             if (newCell !== undefined) newCell.style.backgroundColor = "";
           }
         };
+
         cell.onclick = (e) => {
-          console.log(cell.dataset.x, cell.dataset.y);
+          let shipCoordinates = [
+            [parseInt(cell.dataset.x), parseInt(cell.dataset.y)],
+          ];
           for (let k = 1; k < currentShipLength; k++) {
             const newCell = getSelectCell([i + k, j]);
-            console.log(newCell.dataset.x, newCell.dataset.y);
+            shipCoordinates.push([
+              parseInt(newCell.dataset.x),
+              parseInt(newCell.dataset.y),
+            ]);
           }
+          console.log(shipCoordinates);
+          // nextShip();
         };
       }
 
