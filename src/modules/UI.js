@@ -141,7 +141,8 @@ const UI = (() => {
   // Choose Ship Locations
 
   const isVertical = true;
-  const currentShipLength = 2;
+  const shipLengths = [2, 3, 4, 5];
+  const currentShipLength = 3;
 
   const generateGrid = () => {
     const startScreen = document.getElementById("startScreen");
@@ -161,13 +162,18 @@ const UI = (() => {
 
         cell.onmouseenter = (e) => {
           e.target.style.backgroundColor = "yellow";
-          const newCell = getSelectCell([i + 1, j]);
-          if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
+          for (let k = 1; k < currentShipLength; k++) {
+            const newCell = getSelectCell([i + k, j]);
+            if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
+            console.log(newCell);
+          }
         };
         cell.onmouseout = (e) => {
           e.target.style.backgroundColor = "";
-          const newCell = getSelectCell([i + 1, j]);
-          if (newCell !== undefined) newCell.style.backgroundColor = "";
+          for (let k = 1; k < currentShipLength; k++) {
+            const newCell = getSelectCell([i + k, j]);
+            if (newCell !== undefined) newCell.style.backgroundColor = "";
+          }
         };
       }
 
