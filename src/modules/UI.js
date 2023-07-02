@@ -179,16 +179,25 @@ const UI = (() => {
         //   return false;
         // };
 
+        let isConflicted = false;
+
         const conflicting = (checkCell) => {
-          return game.computerPlayer.board.isShip([
-            checkCell.dataset.x,
-            checkCell.dataset.y,
-          ]);
+          if (checkCell !== undefined) {
+            return game.computerPlayer.board.isShip([
+              checkCell.dataset.x,
+              checkCell.dataset.y,
+            ]);
+          }
+          return true;
         };
 
         cell.onmouseenter = (e) => {
           cell.style.backgroundColor = "yellow";
-          if (conflicting(cell)) cell.style.backgroundColor = "black";
+          if (conflicting(cell) && cell !== undefined) {
+            cell.style.backgroundColor = "black";
+            isConflicted = true;
+          }
+
           for (let k = 1; k < currentShipLength; k++) {
             let newCell = getSelectCell([i, j + k]);
 
@@ -197,12 +206,20 @@ const UI = (() => {
             }
 
             if (newCell !== undefined) newCell.style.backgroundColor = "yellow";
-            if (conflicting(newCell)) newCell.style.backgroundColor = "black";
+            if (conflicting(newCell) && newCell !== undefined) {
+              newCell.style.backgroundColor = "black";
+              isConflicted = true;
+            } else if (newCell === undefined) {
+              isConflicted = true;
+            }
           }
         };
 
         cell.onmouseout = (e) => {
+          isConflicted = false;
+
           cell.style.backgroundColor = "";
+
           for (let k = 1; k < currentShipLength; k++) {
             let newCell = getSelectCell([i, j + k]);
 
@@ -215,31 +232,35 @@ const UI = (() => {
         };
 
         cell.onclick = (e) => {
-          let shipCoordinates = [
-            [parseInt(cell.dataset.x), parseInt(cell.dataset.y)],
-          ];
+          if (!isConflicted) {
+            let shipCoordinates = [
+              [parseInt(cell.dataset.x), parseInt(cell.dataset.y)],
+            ];
 
-          cell.classList.add("selected");
+            if (cell !== undefined) cell.classList.add("selected");
 
-          for (let k = 1; k < currentShipLength; k++) {
-            let newCell = getSelectCell([i, j + k]);
+            for (let k = 1; k < currentShipLength; k++) {
+              let newCell = getSelectCell([i, j + k]);
 
-            if (isVertical) {
-              newCell = getSelectCell([i + k, j]);
+              if (isVertical) {
+                newCell = getSelectCell([i + k, j]);
+              }
+
+              if (newCell !== undefined) {
+                newCell.classList.add("selected");
+                shipCoordinates.push([
+                  parseInt(newCell.dataset.x),
+                  parseInt(newCell.dataset.y),
+                ]);
+              }
+              // console.log(newCell.style.backgroundColor);
             }
 
-            newCell.classList.add("selected");
-            console.log(newCell.style.backgroundColor);
-            shipCoordinates.push([
-              parseInt(newCell.dataset.x),
-              parseInt(newCell.dataset.y),
-            ]);
+            game.computerPlayer.board.placeShip(Ship(shipCoordinates));
+
+            console.log("placed");
+            nextShip();
           }
-
-          game.computerPlayer.board.placeShip(Ship(shipCoordinates));
-
-          console.log("placed");
-          nextShip();
         };
       }
 
