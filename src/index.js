@@ -3,7 +3,7 @@ import Ship from "./modules/Ship.js";
 import game from "./modules/game.js";
 import UI from "./modules/UI.js";
 
-game.initGame();
+
 const switchTurnBtn = document.getElementById("switchTurnBtn");
 UI.renderBoard(game.currentPlayer.board);
 UI.renderStart();

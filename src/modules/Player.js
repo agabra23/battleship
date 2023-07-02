@@ -2,7 +2,6 @@ import Gameboard from "./Gameboard";
 
 const Player = (type) => {
   const attempts = [];
-  const turn = false;
   const board = Gameboard(type);
 
   const attempt = (coordinates) => {
@@ -24,10 +23,41 @@ const Player = (type) => {
       return result;
     };
 
+    const getEmptyAdjacent = (coordinates) => {
+      const options = [
+        [0, 1],
+        [0, -1],
+        [1, 0],
+        [-1, 0],
+      ];
+
+      for (let option of options) {
+        const [xLast, yLast] = board.getLastHit();
+        const newX = xLast + option[0];
+        const newY = yLast + option[1];
+
+        if (!checkAttempted([newX, newY]) && newX >= 0 && newY >= 0)
+          return [newX, newY];
+      }
+      board.setLastHit([]);
+
+      let newMove = [getRandomInt(9), getRandomInt(9)];
+      while (checkAttempted(newMove)) {
+        newMove = [getRandomInt(9), getRandomInt(9)];
+      }
+
+      return newMove;
+    };
+
     let move = [getRandomInt(9), getRandomInt(9)];
 
     while (checkAttempted(move)) {
       move = [getRandomInt(9), getRandomInt(9)];
+    }
+
+    if (board.getLastHit().length !== 0) {
+      move = getEmptyAdjacent(board.getLastHit());
+      console.log("should be next move", move);
     }
 
     attempt(move);

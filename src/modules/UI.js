@@ -32,7 +32,6 @@ const UI = (() => {
     board.innerHTML = `<div id="overlay"></div>`;
 
     const playerTitle = document.createElement("h3");
-    console.log(playerBoard);
     playerTitle.innerHTML = `${playerBoard.type}'s Turn`;
 
     board.appendChild(playerTitle);
@@ -253,12 +252,10 @@ const UI = (() => {
                   parseInt(newCell.dataset.y),
                 ]);
               }
-              // console.log(newCell.style.backgroundColor);
             }
 
             game.computerPlayer.board.placeShip(Ship(shipCoordinates));
 
-            console.log("placed");
             nextShip();
           }
         };

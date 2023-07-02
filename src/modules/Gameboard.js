@@ -5,40 +5,7 @@ const Gameboard = function (type) {
   const hits = [];
   const misses = [];
   let ships = [];
-
-  // const initBoard = () => {
-  //   placeShip(
-  //     Ship([
-  //       [1, 4],
-  //       [1, 5],
-  //     ])
-  //   );
-  //   placeShip(
-  //     Ship([
-  //       [6, 4],
-  //       [6, 5],
-  //       [6, 6],
-  //     ])
-  //   );
-  //   placeShip(
-  //     Ship([
-  //       [4, 2],
-  //       [5, 2],
-  //       [6, 2],
-  //       [7, 2],
-  //     ])
-  //   );
-
-  //   placeShip(
-  //     Ship([
-  //       [8, 3],
-  //       [8, 4],
-  //       [8, 5],
-  //       [8, 6],
-  //       [8, 7],
-  //     ])
-  //   );
-  // };
+  let lastHit = [];
 
   const resetGameboard = () => {
     hits = [];
@@ -72,6 +39,8 @@ const Gameboard = function (type) {
 
     if (boardArray[x][y] !== "none" && alreadyHit === false) {
       boardArray[x][y].hit();
+      setLastHit([x, y]);
+      console.log("Hit!", lastHit);
       hits.push(coordinates);
     } else if (boardArray[x][y] === "none" && alreadyMiss === false) {
       misses.push(coordinates);
@@ -94,6 +63,14 @@ const Gameboard = function (type) {
     return boardArray[x][y];
   };
 
+  const getLastHit = () => {
+    return lastHit;
+  };
+
+  const setLastHit = (coordinates) => {
+    lastHit = coordinates;
+  };
+
   return {
     placeShip,
     boardArray,
@@ -102,11 +79,12 @@ const Gameboard = function (type) {
     misses,
     addShip,
     resetGameboard,
-    // initBoard,
     isShip,
     getShip,
     ships,
     type,
+    getLastHit,
+    setLastHit,
   };
 };
 

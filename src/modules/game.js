@@ -9,22 +9,12 @@ const game = (() => {
 
   let currentPlayer = userPlayer;
 
-  const initGame = () => {
-    const userBoard = userPlayer.board;
-    const computerBoard = computerPlayer.board;
-    // computerBoard.initBoard();
-    // userBoard.initBoard();
-  };
-
   const switchTurn = () => {
-    console.log("start switch", game.currentPlayer.type);
     if (game.currentPlayer === userPlayer) {
       game.currentPlayer = computerPlayer;
     } else {
       game.currentPlayer = userPlayer;
     }
-
-    console.log("end switch", game.currentPlayer.type);
   };
 
   const checkLoss = (player) => {
@@ -34,7 +24,10 @@ const game = (() => {
         return ship.isSunk();
       });
 
-    if (allSunk) alert(`${currentPlayer.type} wins`);
+    if (allSunk) {
+      alert(`${currentPlayer.type} wins`);
+      // resetGame();
+    }
   };
 
   const moveEvent = (cell) => {
@@ -44,7 +37,7 @@ const game = (() => {
         ? computerPlayer.board
         : userPlayer.board;
 
-    cellBoard.receiveAttack([cell.dataset.x, cell.dataset.y]);
+    cellBoard.receiveAttack([cell.dataset.x, cell.dataset.y], currentPlayer);
     UI.attempt([cell.dataset.x, cell.dataset.y], cellBoard);
     UI.styleSunk(cellBoard.type);
     checkLoss(currentPlayer);
@@ -55,6 +48,8 @@ const game = (() => {
   const computerMoveEvent = async () => {
     UI.stopClicks();
 
+    console.log(computerPlayer.board.getLastHit());
+
     const delay = (milliseconds) => {
       return new Promise((resolve) => {
         setTimeout(resolve, milliseconds);
@@ -63,11 +58,10 @@ const game = (() => {
 
     await delay(750);
 
-    console.log("after 1 sec");
     const coordinates = game.computerPlayer.generateMove();
 
     const cellBoard = game.computerPlayer.board;
-    cellBoard.receiveAttack(coordinates);
+    cellBoard.receiveAttack(coordinates, game.computerPlayer);
     UI.attempt(coordinates, cellBoard);
     UI.styleSunk(cellBoard.type);
     game.checkLoss(game.currentPlayer);
@@ -83,7 +77,7 @@ const game = (() => {
   };
 
   return {
-    initGame,
+    // initGame,
     switchTurn,
     computerPlayer,
     userPlayer,
