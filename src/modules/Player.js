@@ -68,23 +68,35 @@ const Player = (type) => {
   const generateRandomPath = (shipLength) => {
     const horizontal = Math.random() < 0.5; // Randomly choose horizontal or vertical placement
     let x, y;
-
-    if (horizontal) {
-      x = Math.floor(Math.random() * (10 - shipLength + 1));
-      y = Math.floor(Math.random() * 10);
-    } else {
-      x = Math.floor(Math.random() * 10);
-      y = Math.floor(Math.random() * (10 - shipLength + 1));
-    }
+    let overlapped = false;
 
     const coordinates = [];
-    for (let i = 0; i < shipLength; i++) {
+
+    do {
       if (horizontal) {
-        coordinates.push([x + i, y]);
+        x = Math.floor(Math.random() * (10 - shipLength + 1));
+        y = Math.floor(Math.random() * 10);
       } else {
-        coordinates.push([x, y + i]);
+        x = Math.floor(Math.random() * 10);
+        y = Math.floor(Math.random() * (10 - shipLength + 1));
       }
-    }
+
+      for (let i = 0; i < shipLength; i++) {
+        if (horizontal) {
+          coordinates.push([x + i, y]);
+        } else {
+          coordinates.push([x, y + i]);
+        }
+      }
+
+      for (let ship of board.ships) {
+        for (set of ship.path) {
+          if (set[0] === coordinates[0] && set[1] === coordinates[1]) {
+            overlapped = true;
+          }
+        }
+      }
+    } while (overlapped);
 
     return coordinates;
   };

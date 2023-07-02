@@ -4,10 +4,21 @@ import Player from "./Player";
 import UI from "./UI";
 
 const game = (() => {
-  const computerPlayer = Player("Computer");
-  const userPlayer = Player("User");
+  let computerPlayer = Player("Computer");
+  let userPlayer = Player("User");
 
   let currentPlayer = userPlayer;
+
+  const resetGame = () => {
+    computerPlayer = Player("Computer");
+    userPlayer = Player("User");
+
+    currentPlayer = userPlayer;
+
+    UI.renderBoard(currentPlayer.board);
+    UI.renderStart();
+    game.setComputerShips();
+  };
 
   const switchTurn = () => {
     if (game.currentPlayer === userPlayer) {
@@ -26,7 +37,7 @@ const game = (() => {
 
     if (allSunk) {
       alert(`${currentPlayer.type} wins`);
-      // resetGame();
+      resetGame();
     }
   };
 
@@ -64,20 +75,19 @@ const game = (() => {
     cellBoard.receiveAttack(coordinates, game.computerPlayer);
     UI.attempt(coordinates, cellBoard);
     UI.styleSunk(cellBoard.type);
-    game.checkLoss(game.currentPlayer);
-    game.switchTurn();
+    checkLoss(game.currentPlayer);
+    switchTurn();
     UI.toggleTurnBtn();
   };
 
   const setComputerShips = () => {
-    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(2)));
-    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(3)));
-    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(4)));
-    game.userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(5)));
+    userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(2)));
+    userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(3)));
+    userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(4)));
+    userPlayer.board.placeShip(Ship(computerPlayer.generateRandomPath(5)));
   };
 
   return {
-    // initGame,
     switchTurn,
     computerPlayer,
     userPlayer,
@@ -86,6 +96,7 @@ const game = (() => {
     moveEvent,
     computerMoveEvent,
     setComputerShips,
+    resetGame,
   };
 })();
 
